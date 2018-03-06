@@ -1,13 +1,21 @@
 
 USAGE: recon-all
+使い方: recon-all
 
  Required Arguments:
    -subjid <subjid>
    -<process directive>
+ 必須の引数
+  -subjid <被験者ID>
+  -<処理に関する指示>
 
  Fully-Automated Directive:
   -all           : performs all stages of cortical reconstruction
   -autorecon-all : same as -all
+ 全自動の指示:
+  -all           : 皮質の再構成の全てのステージを実行
+  -autorecon-all : -all と同じ
+
 
  Manual-Intervention Workflow Directives:
   -autorecon1    : process stages 1-5 (see below)
@@ -23,6 +31,24 @@ USAGE: recon-all
   -autorecon3    : process stages 24-34
                      if edits made to correct pial, then run -autorecon-pial
   -hemi ?h       : just do lh or rh (default is to do both)
+
+ Manual-Intervention Workflow Directives:
+  -autorecon1    : process stages 1-5 (see below)
+  -autorecon2    : process stages 6-23
+                   after autorecon2, check white surfaces:
+                     a. if wm edit was required, then run -autorecon2-wm
+                     b. if control points added, then run -autorecon2-cp
+                     c. proceed to run -autorecon3
+  -autorecon2-cp : process stages 12-23 (uses -f w/ mri_normalize, -keep w/ mri_seg)
+  -autorecon2-wm : process stages 15-23
+  -autorecon2-inflate1 : 6-18
+  -autorecon2-perhemi : tess, sm1, inf1, q, fix, sm2, inf2, finalsurf, ribbon
+  -autorecon3    : process stages 24-34
+                     if edits made to correct pial, then run -autorecon-pial
+  -hemi ?h       : just do lh or rh (default is to do both)
+
+
+
 
   Autorecon Processing Stages (see -autorecon# flags above):
     1.  Motion Correction and Conform
